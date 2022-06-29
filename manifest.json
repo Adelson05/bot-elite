@@ -1,0 +1,42 @@
+{
+    "manifest_version": 3,
+    "name": "Bot Roleta",
+    "description": "Analisa roletas ao vivo da Betano e da bet365",
+    "version": "1.1.0",
+    "icons": {
+        "16": "assets/icon.png",
+        "48": "assets/icon.png",
+        "128": "assets/icon.png"
+    },
+    "action": {
+        "default_icon": {
+            "16": "assets/icon.png",
+            "24": "assets/icon.png",
+            "32": "assets/icon.png"
+        },
+        "default_title": "Bot Roleta",
+        "default_popup": "popup/popup.html"
+    },
+    "options_page": "options/options.html",
+    "background": {
+        "service_worker": "background/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://cachedownload-br.p-content.gambling-malta.com/live/bundles/*",
+                "https://dl-com.c365play.com/live_desktop/bundles/*"
+            ],
+            "js": [
+                "content/contentScript.js"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "permissions": [
+        "storage"
+    ],
+    "optional_permissions": [
+        "unlimitedStorage"
+    ]
+}
