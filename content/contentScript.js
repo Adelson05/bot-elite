@@ -62,7 +62,7 @@ function analisandoEstrategias() {
             displayLobbyExists = true
         }
 
-        inserirTextoDisplay("ROLETA BOT - STATUS : ONLINE", 1)
+        inserirTextoDisplay("BOT ELITE - STATUS : ONLINE", 1)
         //listar as roletas do lobby
         var roletasLobby = listarRoletasLobby(qtdRoletas)
         //incrementr as roletas para buscar confirmação de estrategia
@@ -117,7 +117,7 @@ function analisandoEstrategias() {
                 displayLobbyExists = false
             }
             var nomeRoleta = document.getElementsByClassName('table-info__nameWp_dByC6ZNXpXrcSPbRB')[0].outerText
-            inserirTextoDisplay(`ROLETA BOT - ONLINE : ${nomeRoleta}`, 2)
+            inserirTextoDisplay(`BOT ELITE - ONLINE : ${nomeRoleta}`, 2)
             //carregar roleta
             var roleta = carregarRoleta()
             //buscar confirmação de estrategia
