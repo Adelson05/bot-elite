@@ -2,9 +2,9 @@
 <html lang="pt">
 
 <head>
-    <title>Roleta Bot Config</title>
+    <title>Bot Elite</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="options.css">
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -12,17 +12,13 @@
     <div class="main">
         <div class="signup">
             <form>
-                <label for="chk" aria-hidden="true">Roleta Bot Setup</label>
-                <input id="inputColuna" type="number" min="0" max="10">
-                <span>Repetição de colunas</span>
-                <input id="inputDuzia" type="number" min="0" max="10">
-                <span>Repetição de dúzias</span>
-                <input id="inputAltosBaixos" type="number" min="0" max="10">
-                <span>Repetição de altos/baixos</span>
-                <input id="inputImparPar" type="number" min="0" max="10">
-                <span>Repetição de impar/par</span>
-                <input id="inputCores" type="number" min="0" max="10">
-                <span>Repetição de cores</span>
+                <label for="chk" aria-hidden="true">Bot Elite</label>
+                <input id="inputColuna" type="range" min="0" max="10" step="1.0">
+                <span id="txtColuna"></span>
+                <input id="inputDuzia" type="range" min="0" max="10" step="1.0">
+                <span id="txtDuzia"></span>
+                <input id="inputGale" type="range" min="0" max="10" step="1.0">
+                <span id="txtGale"></span>
                 <button id="btnSalvar" type="button">SALVAR</button>
             </form>
         </div>

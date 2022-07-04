@@ -1,111 +1,75 @@
-var colunaInput = document.getElementById("inputColuna")
-var duziaInput = document.getElementById("inputDuzia")
-var altosBaixosInput = document.getElementById("inputAltosBaixos")
-var imparParInput = document.getElementById("inputImparPar")
-var coresInput = document.getElementById("inputCores")
-var salvarBtn = document.getElementById("btnSalvar")
+var inputColuna = document.getElementById('inputColuna')
+var txtColuna = document.getElementById('txtColuna')
+txtColuna.textContent = `${inputColuna.value} repetições de colunas`
 
-window.onload = init()
+var inputDuzia = document.getElementById('inputDuzia')
+var txtDuzia = document.getElementById('txtDuzia')
+txtDuzia.textContent = `${inputDuzia.value} repetições de dúzias`
 
-function init() {
-    chrome.storage.local.get(["colunarep", "duziarep", "altosbaixosrep", "parimparrep", "coresrep"], (res) => {
-        if (res.colunarep == undefined) {
-            setColunaRep("5")
-            colunaInput.setAttribute('value', '5')
-        } else {
-            colunaInput.setAttribute('value', `${res.colunarep}`)
-        }
-        if (res.duziarep == undefined) {
-            setDuziaRep("5")
-            duziaInput.setAttribute('value', '5')
-        } else {
-            duziaInput.setAttribute('value', `${res.duziarep}`)
-        }
-        if (res.altosbaixosrep == undefined) {
-            setAltosBaixosRep("0")
-            altosBaixosInput.setAttribute('value', '0')
-        } else {
-            altosBaixosInput.setAttribute('value', `${res.altosbaixosrep}`)
-        }
-        if (res.parimparrep == undefined) {
-            setParImparRep("0")
-            imparParInput.setAttribute('value', '0')
-        } else {
-            imparParInput.setAttribute('value', `${res.parimparrep}`)
-        }
-        if (res.coresrep == undefined) {
-            setCoresRep("0")
-            coresInput.setAttribute('value', '0')
-        } else {
-            coresInput.setAttribute('value', `${res.coresrep}`)
-        }
-    })
-}
+var inputGale = document.getElementById('inputGale')
+var txtGale = document.getElementById('txtGale')
+txtGale.textContent = `${inputGale.value} gale`
 
-
-salvarBtn.addEventListener("click", () => {
-    //salvar configurações
-    if (colunaInput.value == '') {
-        setColunaRep('5')
-    } else {
-        setColunaRep(colunaInput.value)
-    }
-    if (duziaInput.value == '') {
-        setDuziaRep('5')
-    } else {
-        setDuziaRep(duziaInput.value)
-    }
-    if (altosBaixosInput.value == '') {
-        setAltosBaixosRep('0')
-    } else {
-        setAltosBaixosRep(altosBaixosInput.value)
-    }
-    if (imparParInput.value == '') {
-        setParImparRep('0')
-    } else {
-        setParImparRep(imparParInput.value)
-    }
-    if (coresInput.value == '') {
-        setCoresRep('0')
-    } else {
-        setCoresRep(coresInput.value)
-    }
-
-    confirm("CONFIGURAÇÃO SALVA COM SUCESSO")
+var btnSalvar = document.getElementById('btnSalvar')
+btnSalvar.addEventListener("click", () => {
+    salvarConfig();
 })
 
-//salvar repetições de colunas nas configurações
-function setColunaRep(colunarep) {
+inputColuna.addEventListener("input", () => {
+    txtColuna.textContent = `${inputColuna.value} repetições de colunas`
+})
+
+inputDuzia.addEventListener("input", () => {
+    txtDuzia.textContent = `${inputDuzia.value} repetições de dúzias`
+})
+
+inputGale.addEventListener("input", () => {
+    txtGale.textContent = `${inputGale.value} gale`
+})
+
+function salvarConfig() {
+    var configuracao = {
+        coluna: inputColuna.value,
+        duzia: inputDuzia.value,
+        gale: inputGale.value,
+    }
     chrome.storage.local.set({
-        colunarep,
+        configuracao,
     }, () => {
     })
+    alert("Configuração gravada com sucesso")
 }
-//salvar repetições de duzias nas configurações
-function setDuziaRep(duziarep) {
-    chrome.storage.local.set({
-        duziarep,
-    }, () => {
+
+function carregarConfiguracao() {
+    chrome.storage.local.get(["configuracao"], (res) => {
+
+        if (res.configuracao == undefined) {
+            var configuracao = {
+                coluna: 5,
+                duzia: 5,
+                gale: 1
+            }
+            chrome.storage.local.set({
+                configuracao,
+            }, () => {
+            })
+
+            txtColuna.textContent = `5 repetições de colunas`
+            txtDuzia.textContent = `5 repetições de dúzias`
+            txtGale.textContent = `1 gale`
+            inputColuna.value = 5
+            inputDuzia.value = 5
+            inputGale.value = 1
+        } else {
+            txtColuna.textContent = `${res.configuracao.coluna} repetições de colunas`
+            txtDuzia.textContent = `${res.configuracao.duzia} repetições de dúzias`
+            txtGale.textContent = `${res.configuracao.gale} gale`
+            inputColuna.value = res.configuracao.coluna
+            inputDuzia.value = res.configuracao.duzia
+            inputGale.value = res.configuracao.gale
+        }
+
     })
 }
-//salvar repetições de altos/baixos nas configurações
-function setAltosBaixosRep(altosbaixosrep) {
-    chrome.storage.local.set({
-        altosbaixosrep,
-    }, () => {
-    })
-}
-//salvar repetições de par/impar nas configurações
-function setParImparRep(parimparrep) {
-    chrome.storage.local.set({
-        parimparrep,
-    }, () => {
-    })
-}
-//salvar repetições de cores nas configurações
-function setCoresRep(coresrep) {
-    chrome.storage.local.set({
-        coresrep,
-    }, () => {
-    })
-}
+
+carregarConfiguracao()
